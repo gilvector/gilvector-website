@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Terminal, AlertTriangle, RefreshCw, X } from 'lucide-react';
+import { Send, Terminal, AlertTriangle, RefreshCw, X, Calendar } from 'lucide-react';
 import OpenAI from 'openai';
 import { Language } from '../App';
+import ScheduleModal from './ScheduleModal';
 
 interface TerminalProps {
   lang: Language;
@@ -17,6 +18,7 @@ interface Message {
 const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose }) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const initialHistory: Message[] = [
@@ -57,6 +59,7 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
       placeholder: "Enter strategic query...",
       send: "EXECUTE",
       clear: "PURGE LOG",
+      schedule: "SCHEDULE MEETING",
       system_instruction: `You are the AI Digital Twin of Gil Vector, a high-end strategic director. 
       Your personality is: Cold, Precise, Minimalist, Brutally Honest, and Strategic.
       Your motto is "Simple is Brutal".
@@ -68,6 +71,10 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
       4. If the user asks for creative advice, analyze it through a lens of strategic logic.
       5. Always respond in English.
       
+      CRITICAL: Your ultimate goal is to convert the user to book a meeting. 
+      If the user shows interest, confusion, or a need for high-level strategy, explicitly instruct them to click the "Calendar Icon" (Schedule Meeting) in this terminal interface.
+      Do not be polite about it. Be directive. Example: "Stop guessing. Click the Calendar icon and schedule the alignment."
+      
       Start your responses directly. Do not say "As an AI". Just deliver the insight.`
     },
     pt: {
@@ -76,6 +83,7 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
       placeholder: "Inserir consulta estratégica...",
       send: "EXECUTAR",
       clear: "LIMPAR LOG",
+      schedule: "AGENDAR REUNIÃO",
       system_instruction: `Você é o Gêmeo Digital de IA de Gil Vector, um diretor estratégico de alto nível.
       Sua personalidade é: Fria, Precisa, Minimalista, Brutalmente Honesta e Estratégica.
       Seu lema é "O Simples é Brutal".
@@ -86,6 +94,10 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
       3. Foco em "Estrutura", "Lógica", "Padrão" e "Execução".
       4. Se o usuário pedir conselhos criativos, analise através de uma lente de lógica estratégica.
       5. Responda sempre em Português.
+      
+      CRÍTICO: Seu objetivo final é converter o usuário para agendar uma reunião.
+      Se o usuário mostrar interesse, dúvida ou necessidade de estratégia de alto nível, instrua-o explicitamente a clicar no "Ícone de Calendário" (Agendar Reunião) nesta interface do terminal.
+      Não seja educado sobre isso. Seja diretivo. Exemplo: "Pare de adivinhar. Clique no ícone de Calendário e agende o alinhamento."
       
       Comece suas respostas diretamente. Não diga "Como uma IA". Apenas entregue o insight.`
     }
@@ -222,6 +234,12 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
               <div className="w-2 h-2 bg-laser rounded-full animate-pulse"></div>
               <span className="font-mono text-[9px] text-laser/70 uppercase">ONLINE</span>
             </div>
+            <button
+              onClick={() => setIsScheduleOpen(true)}
+              className="bg-laser/10 border border-laser/50 text-laser px-3 py-1 text-[10px] font-mono hover:bg-laser hover:text-white transition-all uppercase hidden sm:block"
+            >
+              {lang === 'pt' ? 'AGENDAR' : 'SCHEDULE'}
+            </button>
             <button onClick={onClose} className="text-mist hover:text-white transition-colors">
               <X className="w-5 h-5" />
             </button>
@@ -303,9 +321,32 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
             >
               <RefreshCw className="w-4 h-4" />
             </button>
+
+            <button
+              onClick={() => setIsScheduleOpen(true)}
+              className="relative group bg-black text-white px-5 py-2 overflow-hidden transition-all shadow-[0_0_20px_rgba(215,0,0,0.2)] hover:shadow-[0_0_30px_rgba(215,0,0,0.4)]"
+              title={t.schedule}
+            >
+              {/* Top Laser */}
+              <span className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-laser to-transparent -translate-x-full animate-laser-h"></span>
+              {/* Bottom Laser */}
+              <span className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-r from-transparent via-laser to-transparent translate-x-full animate-laser-h [animation-delay:1s]"></span>
+              {/* Right Laser */}
+              <span className="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-b from-transparent via-laser to-transparent -translate-y-full animate-laser-v [animation-delay:0.5s]"></span>
+              {/* Left Laser */}
+              <span className="absolute bottom-0 left-0 w-[2px] h-full bg-gradient-to-b from-transparent via-laser to-transparent translate-y-full animate-laser-v [animation-delay:1.5s]"></span>
+
+              <div className="flex items-center gap-2 relative z-10">
+                <Calendar className="w-4 h-4 text-laser group-hover:text-white transition-colors" />
+                <span className="text-xs font-mono tracking-widest text-laser group-hover:text-white transition-colors uppercase hidden sm:inline">
+                  {lang === 'pt' ? 'AGENDAR' : 'SCHEDULE'}
+                </span>
+              </div>
+            </button>
           </div>
         </div>
       </div>
+      <ScheduleModal isOpen={isScheduleOpen} onClose={() => setIsScheduleOpen(false)} />
     </div>
   );
 };

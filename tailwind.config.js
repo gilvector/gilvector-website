@@ -31,6 +31,8 @@ export default {
         'scan': 'scan 4s linear infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'laser-h': 'laser-h 2s linear infinite',
+        'laser-v': 'laser-v 2s linear infinite',
       },
       keyframes: {
         scan: {
@@ -40,6 +42,14 @@ export default {
         fadeInUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'laser-h': {
+          '0%': { left: '-100%' },
+          '50%, 100%': { left: '100%' }
+        },
+        'laser-v': {
+          '0%': { top: '-100%' },
+          '50%, 100%': { top: '100%' }
         }
       }
     },
