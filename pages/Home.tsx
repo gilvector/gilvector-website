@@ -5,6 +5,8 @@ import Features from '../components/Features';
 import Integration from '../components/Integration';
 import BentoGrid from '../components/BentoGrid';
 import { Language } from '../App';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface HomeProps {
     lang: Language;
