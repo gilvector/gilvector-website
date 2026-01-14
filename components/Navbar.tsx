@@ -44,11 +44,17 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenTerminal }) => {
     }
   };
 
+  const handleHomeClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="fixed w-full z-50 top-0 border-b border-white/[0.02] bg-black/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-4 group">
+        <Link to="/" onClick={handleHomeClick} className="flex items-center gap-4 group">
           <div className="w-10 h-10 flex items-center justify-center bg-graphene border border-white/5 relative group-hover:border-laser/50 transition-colors duration-500">
             <img src="/gv-logo.png" alt="GV" className="w-full h-full object-cover" />
             {/* Subtle Arrow */}
@@ -62,7 +68,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenTerminal }) => {
 
         {/* Desktop Links - Minimalist */}
         <div className="hidden md:flex items-center gap-12">
-          <Link to="/" className="text-[10px] font-mono font-medium text-mist hover:text-white transition-colors uppercase tracking-[0.2em]">{t.home}</Link>
+          <Link to="/" onClick={handleHomeClick} className="text-[10px] font-mono font-medium text-mist hover:text-white transition-colors uppercase tracking-[0.2em]">{t.home}</Link>
           <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="text-[10px] font-mono font-medium text-mist hover:text-white transition-colors uppercase tracking-[0.2em]">{t.links[0]}</a>
           <a href="#features" onClick={(e) => handleScroll(e, 'features')} className="text-[10px] font-mono font-medium text-mist hover:text-white transition-colors uppercase tracking-[0.2em]">{t.links[1]}</a>
           <a href="#integration" onClick={(e) => handleScroll(e, 'integration')} className="text-[10px] font-mono font-medium text-mist hover:text-white transition-colors uppercase tracking-[0.2em]">{t.links[2]}</a>
