@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Language } from '../App';
 import InfoModal, { InfoType } from './InfoModal';
 
@@ -102,18 +103,18 @@ const Footer: React.FC<FooterProps> = ({ lang, onOpenTerminal }) => {
               </div>
               <div className="flex flex-col gap-4">
                 <span className="text-[10px] font-mono text-mist uppercase tracking-widest">{t.policy}</span>
-                <button
-                  onClick={() => setActiveModal('privacy')}
+                <Link
+                  to="/privacy-policy"
                   className="text-left text-xs text-silver/60 hover:text-white hover:text-laser transition-colors font-mono"
                 >
                   {t.policies.privacy}
-                </button>
-                <button
-                  onClick={() => setActiveModal('terms')}
+                </Link>
+                <Link
+                  to="/terms-of-use"
                   className="text-left text-xs text-silver/60 hover:text-white hover:text-laser transition-colors font-mono"
                 >
                   {t.policies.terms}
-                </button>
+                </Link>
                 <button
                   onClick={() => setActiveModal('cookies')}
                   className="text-left text-xs text-silver/60 hover:text-white hover:text-laser transition-colors font-mono"
