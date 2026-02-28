@@ -12,8 +12,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     define: {
-      'process.env.API_KEY': JSON.stringify(env.OPENROUTER_API_KEY || env.GEMINI_API_KEY || env.GOPENROUTER_API_KEY || ''),
-      'process.env.OPENROUTER_API_KEY': JSON.stringify(env.OPENROUTER_API_KEY || env.GEMINI_API_KEY || env.GOPENROUTER_API_KEY || '')
+      'process.env.API_KEY': JSON.stringify(env.VITE_OPENAI_API_KEY || env.OPENAI_API_KEY || ''),
     },
     resolve: {
       alias: {

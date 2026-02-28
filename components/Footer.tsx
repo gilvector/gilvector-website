@@ -62,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ lang, onOpenTerminal }) => {
             <div className="max-w-xs">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-8 h-8 bg-graphene flex items-center justify-center border border-white/10">
-                  <img src="/gv-logo.png" alt="GV" className="w-full h-full object-cover" />
+                  <img src="/favicon.png" alt="GV" className="w-full h-full object-cover" />
                 </div>
               </div>
               <p className="text-sm font-light text-silver/60 leading-relaxed mb-6">

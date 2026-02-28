@@ -56,7 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, onOpenTerminal }) => {
         {/* Logo */}
         <Link to="/" onClick={handleHomeClick} className="flex items-center gap-4 group">
           <div className="w-10 h-10 flex items-center justify-center bg-graphene border border-white/5 relative group-hover:border-laser/50 transition-colors duration-500">
-            <img src="/gv-logo.png" alt="GV" className="w-full h-full object-cover" />
+            <img src="/favicon.png" alt="GV" className="w-full h-full object-cover" />
             {/* Subtle Arrow */}
             <div className="absolute top-1 right-1 w-2 h-2 border-t border-r border-laser opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </div>

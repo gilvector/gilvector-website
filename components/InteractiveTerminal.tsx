@@ -114,18 +114,17 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
     setIsLoading(true);
 
     const modelList = [
-      "meta-llama/llama-3.3-70b-instruct:free",
-      "meta-llama/llama-guard-3-8b:free",
-      "meta-llama/llama-3.2-3b-instruct:free"
+      "gpt-4o-mini",
+      "gpt-4o",
+      "gpt-3.5-turbo"
     ];
 
     try {
       if (!process.env.API_KEY) {
-        throw new Error("Missing API Key. Please add OPENROUTER_API_KEY to your .env.local file.");
+        throw new Error("Missing API Key. Please add VITE_OPENAI_API_KEY to your .env.local file.");
       }
 
       const openai = new OpenAI({
-        baseURL: "https://openrouter.ai/api/v1",
         apiKey: process.env.API_KEY,
         dangerouslyAllowBrowser: true
       });
