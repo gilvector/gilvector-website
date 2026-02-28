@@ -120,12 +120,12 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
     ];
 
     try {
-      if (!process.env.API_KEY) {
+      if (!import.meta.env.VITE_OPENAI_API_KEY) {
         throw new Error("Missing API Key. Please add VITE_OPENAI_API_KEY to your .env.local file.");
       }
 
       const openai = new OpenAI({
-        apiKey: process.env.API_KEY,
+        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
         dangerouslyAllowBrowser: true
       });
 
