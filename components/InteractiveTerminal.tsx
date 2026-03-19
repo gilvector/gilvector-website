@@ -136,18 +136,19 @@ const InteractiveTerminal: React.FC<TerminalProps> = ({ lang, isOpen, onClose })
     setIsLoading(true);
 
     const modelList = [
-      "gpt-4o-mini",
-      "gpt-4o",
-      "gpt-3.5-turbo"
+      "llama-3.1-70b-versatile",
+      "llama-3.1-8b-instant",
+      "mixtral-8x7b-32768"
     ];
 
     try {
-      if (!import.meta.env.VITE_OPENAI_API_KEY) {
-        throw new Error("Missing API Key. Please add VITE_OPENAI_API_KEY to your .env.local file.");
+      if (!import.meta.env.VITE_GROQ_API_KEY) {
+        throw new Error("Missing API Key. Please add VITE_GROQ_API_KEY to your .env.local file.");
       }
 
       const openai = new OpenAI({
-        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+        baseURL: "https://api.groq.com/openai/v1",
+        apiKey: import.meta.env.VITE_GROQ_API_KEY,
         dangerouslyAllowBrowser: true
       });
 
